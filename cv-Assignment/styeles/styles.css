@@ -1,0 +1,72 @@
+.profile{
+    display: flex;
+    margin:30 px;
+  }
+  .image{
+      border: 3px solid black;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px;
+  }
+  .image img {
+      max-width: 100%; 
+      max-height: 100%; 
+      border-radius: 50%;
+   
+  }
+  .intro{
+      background-color: rgb(176, 173, 173);
+      width: 100%;
+      border: 3px solid black ;
+      margin-left: 50p
+     margin: 30px;
+ 
+  }
+  .experience{
+      background-color: rgb(84, 245, 84);
+      border: 3px solid black;
+      margin:30px;
+  }
+  .projects{
+      background-color: rgb(128, 192, 247);
+      border: 3px solid black;
+      margin:30px;
+  }
+  .skills{
+      background-color: yellow;
+      border: 3px solid black;
+      margin:30px;
+  }
+  .contact{
+      background-color: pink;
+      border: 3px solid black;
+      margin:30px;
+  }
+  .header{
+      background-color: gray;
+      border: solid black;
+  }
+  .job{
+      margin-left: 50%;
+
+  }
+  .header{
+      display: flex;
+  }
+  .fname{
+      margin-left: 10%;
+  }
+  .image{
+    border-radius: 50%
+  }
+  .image2{
+    width:30%; 
+    margin:30px;
+  }
+  .order-list{
+    list-style-type:upper-alpha
+  }

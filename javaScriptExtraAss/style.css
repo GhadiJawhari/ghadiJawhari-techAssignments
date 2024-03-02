@@ -1,0 +1,109 @@
+
+.Welcome{
+ color: #969696;
+}
+.gallery{
+   display:flex;   
+   margin-right: 700px;
+   margin-left: -90px;
+   justify-content: space-around;
+
+   
+
+}
+.glove{
+    height: 250px;
+    width: 250px;
+    margin-top: 10px;
+
+ 
+      
+}
+#gloves{
+    margin-left: -360px;   
+   
+}
+select{
+    width: 120px;
+    height: 24px;
+    margin-top: 250px;
+    margin-right: -120px;  
+}
+.scarf{
+    height: 250px;
+    width: 250px;
+    margin-top: 10px;   
+}
+#scarfs{
+    margin-left: -360px;
+}
+.hat{
+    height: 250px;
+    width: 250px;
+    margin-top: 10px; 
+  
+}
+#hats{
+    margin-left: -360px;
+    
+}
+.hatButton{
+   
+    width: 80px;
+    height: 25px;
+    margin-top: 300px;
+    margin-left: -140px;
+    
+    
+}
+.scarfButton{
+   
+    width: 80px;
+    height: 25px;
+    margin-top: 300px;
+    margin-left: -140px;
+    
+}
+.gloveButton{
+   
+    width: 80px;
+    height: 25px;
+    margin-top: 300px;
+    margin-left: -140px;
+    
+}
+
+#name{
+    margin-left: 1000px;
+}
+ 
+#email{
+    margin-left: 1000px;
+    
+}
+
+label{
+ position: absolute;
+ align-items: flex-start;
+margin-left: 950px;
+color: #969696;
+
+}
+form{
+    margin-bottom: 250px;
+    margin-top: -300px;
+    margin-left: 100px;
+}
+  
+#message{
+    margin-left:950px;
+}
+.orderButton{
+    width: 80px;
+    height: 25px;
+    margin-left:950px;  
+}
+.horLine{
+    margin-top: -200px;
+    margin-bottom:80px ;
+}

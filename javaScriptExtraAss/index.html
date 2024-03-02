@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendy Wellseley's Shop</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js" defer></script>
+</head>
+<body >
+
+    <fieldset>
+        <h2 class="Welcome">Welcome to Wendy Wellseley's Shop!</h2> 
+        <div class="gallery">
+            <img id="glove" src="./pictures/glove.png" alt="glove image" class="glove">
+            <select title="gloves" id="gloves">
+                <option value="" disabled selected>Choose quantity</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <input type="button" value="Add to list" class="gloveButton"  onclick="generateOrderSummary()">
+            <img id="hat" src="./pictures/hatt.png" alt="hat image" class="hat">
+            <select title="hats" id="hats">
+                <option value="" disabled selected>Choose quantity</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <input type="button" value="Add to list" class="hatButton" onclick="generateOrderSummary()">
+            
+            <img id="scarf" src="./pictures/scarf.png" alt="scarf image" class="scarf">
+            <select title="scarfs" id="scarfs">
+                <option value="" disabled selected>Choose quantity</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <input type="button" value="Add to list" class="scarfButton" onclick="generateOrderSummary()">
+           
+        </div>
+        <div>
+        <form >
+            <label for="name" >Name:</label>
+            
+            <input type="text" id="name" name="name">
+           <br> <br>
+            <label for="email" >Email:</label>
+            
+            <input type="text" id="email" name="email">
+            <br><br>
+            <label for="message" >Order Summary:</label>
+            <br>
+            <textarea name="message" id="message" cols="40" rows="10"></textarea>
+            <input type="button" value="Place Order" class="orderButton" onclick="generateOrderSummary()">
+            
+        </form>
+       
+    </div>
+    <hr class="horLine">
+    
+    </fieldset>
+</body>
+</html>

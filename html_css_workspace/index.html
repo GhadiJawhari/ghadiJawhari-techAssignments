@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%;
+            
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+        .styled_border{
+
+            border-top:solid;
+             border-color:rgb(230, 228, 228) ; 
+             padding-right: 5%;
+             padding-left: 6%;
+
+        }
+      
+    </style>
+</head>
+<body>
+   <fieldset style="border: none; padding-left:6%;padding-right: 5%;">
+    <div style=" padding-left: 6%;padding-right: 5%;background-color: rgba(231, 225, 225, 0.926);color: rgb(139, 139, 234);height:5%"><label for="Reviee " >Review:</label>
+        <select name="review" id="review">
+            <option value=""></option>  
+        </select>
+        <label for="orders" style="margin-left: 78%;">View:</label>
+        <select name="view" id="view" >
+            <option value="view">Review Orders</option>
+        </select>
+    </div>
+    <div style=" border-bottom:solid;   border-color:rgb(230, 228, 228); padding-bottom: 2%; padding-left:6%;padding-right: 5%;"> 
+        <span style='font-size:30px; color: rgb(125, 125, 251);'>&#8645;</span>
+        <input type="button" style="padding-left: 3%;  width:10%; margin-left: 65%;margin-top: -2%; display: flex; margin-bottom: 3.3%;"value="ok"  >
+        <input type="button" style="width:10%; margin-left: 78%; display: flex; padding-left: 3%; margin-top: -5%;"value="delete">
+        <input type="button" style="width:10%; margin-left: 90%;display: flex;margin-top: -1.5%;padding-left: 3%;"value="cancel" >  
+       </div> 
+    </fieldset>
+<fieldset style="margin-left: 5%; margin-right: 5%; border: none;">
+    
+<table border="0">
+    
+    <tr>
+        <td>
+            <b style="margin-right:5%;">Customer:</b>
+            <input type="text" style="width: 14%;">
+        </td>
+        <td>
+            <b  style="margin-left: 20%;" >Address:</b>
+            <input type="text" style="width:60%; margin-left:43%; display: flex; margin-top: -2.5%;">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b style="margin-right:5%;">Employee:</b>
+            <input type="text" style="width: 14%;">
+        </td>
+        <td>
+            <b  style="margin-left: 20%;"  >City:</b>
+            <input type="text" style="width:60%; margin-left:43%; display: flex; margin-top: -2.5%;">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b style="margin-right:3.5%;">Order Date:</b>
+            <input type="date">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDkrhCm50rJOdPPZXwZyhst8Jhv56DuXvRAA&usqp=CAU" alt="" style="height:30PX ; margin-bottom: -4.5PX;">
+        </td>
+        <td>
+            <b style="margin-left: 20%;" >Region:</b>
+            <input type="text" style="width:60%; margin-left:43%; display: flex; margin-top: -2.5%;">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b style="margin-right:10%;">Required <br>Date:</b>
+            <input type="date">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDkrhCm50rJOdPPZXwZyhst8Jhv56DuXvRAA&usqp=CAU" alt="" style="height:30PX ; margin-bottom: -4.5PX;">
+        </td>
+        <td>
+            <b style="margin-left: 20%;">Postal Code:</b>
+            <input type="text" style="width:60%; margin-left:43%; display: flex; margin-top: -2.5%;">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b style="margin-right:2.5%;">Shipped Date:</b>
+            <input type="date"  >
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDkrhCm50rJOdPPZXwZyhst8Jhv56DuXvRAA&usqp=CAU" alt="" style="height:30PX ; margin-bottom: -4.5PX;">
+        </td>
+        <td>
+            <b style="margin-left: 20%;">Ship Country:</b>
+            <input type="text" style="width:60%; margin-left:43%; display: flex; margin-top: -2.5%;">
+        </td>
+    </tr>
+    
+</table >
+</fieldset>
+<fieldset  style="margin-right: 5%; margin-left: 6%;">
+
+<table style="border-collapse: collapse;">
+    
+        <tr style="background-color: rgba(231, 225, 225, 0.926); " ><td  ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAY1BMVEX///8AAADIyMjp6enk5OTOzs7m5uYiIiLLy8saGhofHx8lJSUEBAQdHR37+/sVFRUNDQ3V1dVOTk5JSUkXFxfw8PBVVVU/Pz92dnZ8fHxpaWnBwcGwsLA5OTmWlpZLS0ufn5/5SyuiAAAE2klEQVR4nO3d63raMAwGYELStEALbel6Pt3/VQ7musGgJJLjg8y+97ezJxqWJVdsnc0AAAAAAAAAAAAAAAAAAAAAAAAAAKL6k/sFJmC8+/yxqqrF5zr+ywS3/lzs3v1xPrzqtTI2d2neKqC7zc+7vw4sWt9Xv0b+KtSZd69+378Dv6oDFwlfb7qLw1ff9q16qhxXKd9woiv31Z/IReuv6kg5G3V+/OpfxEY9zMHSPsWr01cncnF7uqqUXLygXv0kF5+oVWVs1JMtari5SG3RUkLsCfBoo/YGqH+jklv0J8RuVc8WNXQfN8Qh07EbdU0eMh3NG7V3ixpbs1Efh1dpDnEkwF0fvl/1PLZKby4O5KD1vGvJx1dp/RRHP8G9u9kLZ5nKEFkBVi+zFWudwhN18BTtrGa8dfpykZGDxmzBXalro/K26M7i9+cWZYXIDrB6nb2x1yraqOwtWlVvgz3pMS3HDfOQ2dv3pjXzNN3TsVH5W7Ra1fsH2lv+Exo+RcEneNuaR2r+IwpyUZCD17V9qF3yn8q9UQVb9LLtHmuKCVEQ4LI5fLDlP5g1FwU5WLXuo/Vm/JH8IQoC3NTHDzeX/KdzbVRJDjanjzcP2kMUBPhABKi/aAjKRHWyRY36hv9HpM9FQQ4uewLUnYsTc9DS28B5tGq0WhBiylwU5OBt7xY1WpUb1bNVozWC4yZViIIAbwZy0NJXNAKUCVctKP0pjhvBIbNgBaitaAQqE65G0IbHDlEQ4Gb0kOnoycXgOWhpufVLLryiALXc+qPkoKXh1i84Ra8FOWjlb+ACtmq03A1c0FaN1rDnUjFCDNyq0XIWjWhlwlULPsWwx02EVo2Wq4GLWiZceW79kp+Leh4ynRy56DV88Ze+gUtQJlypG7iEOWilbeAkw5cAW9RIObaZNHzxl65oSGb0QXLQSjW2EQS4CJSDVpqikahVo6UY2wQZvviLn4sZyoQrdgMXbPjiL+6tP/qNniPmrT95q0aLN7bx/p5MaLGKRtYy4Yoztkl2o+eIUTSytWq08GMbyfdkEgQYPhcV5aAV9tYfcfjiL2QuZm/VaO01/72GT1QFrRotVAMnyMGQN3qOMA2csjLhCjG2UdOq0aYXDYVlwjV1bCM4ZG6yBDi1aKjOQWtKAxfpezKh+edi4uGLP98GTtLJZA3Qd2yjtFWj+Yxtsgxf/EnGNiYXFbdqNGnRKKJMuGQNnOR7MkoClBWNb8FaFVvUkIxt2NLd6Dkkuci0yl4mXJKxDUvaGz1HLfjBBidAVVvUkNz6R2kpEy5JAzcif6tGkxSNYQq3qCFp4AbEH774C1I0dOagJbn1932CqgMMkYuKt6hRTztRc9/oOSblorZWjSYZ2xzR16rRJGMbh44bPYdnA6e7TLgk37v5lWP44s+naBSzRQ3J2OafXMMXf8KiUVIOWqIGLs33ZEIT5GLe4Ys/9timhFaNxrz1a73Rc7DGNqVuUYNx638oOkBG0SixTLhGxjbL4gMcKxqFb1FjoIHTNXzx15uL5eeg1TO2yfk9mdDIsY3G4Ys/4ta/OqsAiQYu5j/tyeO4gTuzT3DPaeA0D1/8Nd1/jX4+ZcJV21/Zsy3512QOe//Yxffxnvs14jrfjw8AAAAAAAAAAAAAAAAAAAAAAAAA/gt/AWnENggkyCCYAAAAAElFTkSuQmCC" alt="" style="border-radius:50px; height: 10px;border-style:solid;background-color: aliceblue; margin-right: 4px; margin-top:1px ;"><input type="text" placeholder="cha"></td>
+        <td style="color: rgba(14, 65, 192, 0.774); "> New Order Details</td>
+        <td ><label for="actions" style="color: rgba(14, 65, 192, 0.774);">Actions</label>
+        <select name="action" id="action">
+            <option value=""></option>
+        </select></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="color: rgba(14, 65, 192, 0.774) ;"> product name:</td>
+        <td style="color: rgba(14, 65, 192, 0.774) ;"> unit price </td>
+        <td  style="color: rgba(14, 65, 192, 0.774) ;">Quantity</td>
+        <td  style="color: rgba(14, 65, 192, 0.774) ;">Discount</td>
+        <td style="color: rgba(14, 65, 192, 0.774) ;">product <br>  Category <br> name</td>
+        <td style="color: rgba(14, 65, 192, 0.774) ;">product Supplier <br>Company name</td>
+        <td style="color: rgba(14, 65, 192, 0.774) ;">Extended Price</td>
+    </tr>
+    <tr><td style="color: rgb(48, 165, 248);">grandma's <br>boysenberry spread</td>
+    <td>$25</td><td>20</td> <td>25.00%</td><td>Condiments</td> <td>Grandma Kelly's <br>Homestead</td> <td>$375.00</td>
+</tr>
+    
+    <tr>
+        <td style="color: rgb(48, 165, 248);">Tofu</td>
+        <td>$23.25</td><td>20</td> <td>25.00%</td><td>Produce</td> <td>Mayumi's</td> <td>$348.75</td>
+    </tr>
+    <tr> <td style="color: rgb(48, 165, 248);">Teatime Chocolate <br> biscuits</td>
+        <td>$9.20</td><td>10</td> <td>25.00%</td><td>Confections</td> <td>Spaciality biscuits <br>ltd</td> <td>$69</td>
+    </tr>
+</table>
+<div style="border-top-style:dashed ; border-color:rgb(230, 228, 228) ;" >
+    <h4 style="color:  rgb(230, 228, 228) ;margin-left: 10%;">Avg:$19.5 Sum:50 Avg:25.00%</h4>
+    <h4 style="margin-left: 80%;display:flex; margin-top: -3.5%;color:  rgb(230, 228, 228)">Sum:$792.75</h4>
+    </div>
+</fieldset>
+<fieldset style="margin-left: 5%;margin-right: 5%; border: none;" >
+<table>
+    <tr>
+        <td><b>Ship Name:</b> <input type="text" ></td>
+        <td style="padding-left:27% ;"> <b>subtotal</b></td>
+    </tr>
+    <tr> <td><b>ship via :</b> <select style="margin-left: 3%;"  name="via" id="via">
+        <option value="via">untitled package</option>
+    </select></td>
+<td style="padding-left: 27%;"><b>Freight:</b><input style="width: 8%;" type="text"></td></tr>
+<tr > <td style="padding-left: 81%;"><b>Total:</b></td></tr>
+</table>
+</fieldset>
+<fieldset style="border: none; padding-left: 6%;padding-right: 5%;">
+<div style=" padding-right: 5%;padding-left: 6%;"class="styled_border" > 
+    <span style='font-size:30px; color: rgb(125, 125, 251);'>&#8645;</span>
+    <input type="button" style="width:10%; margin-left: 65%;display: flex;"value="ok" >
+    <input type="button" style="width:10%; margin-left: 78%; display: flex; padding-left: 3%; margin-top: -1.8%;"value="delete">
+    <input type="button" style="width:10%; margin-left: 90%;display: flex;margin-top: -2%;padding-left: 3%;"value="cancel" >
+</fieldset>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML PART 2</title>
+</head>
+<body>
+    <div>
+        <p> Today TODO list</p>
+        <ol>
+            <li>HTML videos ✅ </li>
+            <li>HTML audios ✅ </li>
+            <li>Working with external HTML pages ✅ </li>
+            <li>HTML plugins ✅</li>
+            <li>HTML forms ✅</li>
+            <li>Our HTML assignemt</li>
+        </ol>
+    </div>
+
+    <div>
+        <video width="400" height="350" controls>
+            <source src="./shortfilm.mp4" type="video/mp4">
+            Your browser don't support the video tag
+        </video>
+    </div>
+
+    <hr> <br>
+
+    <div>
+        <audio controls>
+            <source src="./crossing_field.mp3" type="audio/mpeg">
+            Your browser don't support the audio tag
+        </audio>
+    </div>
+
+    <br> <hr>
+
+    <div>
+        <iframe width="800" height="300" 
+        src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=1">
+        </iframe>
+    </div>
+
+
+    <br><br><br>
+    <div>
+        <form autocomplete="on">
+            <label for="fname"> First Name: </label><br>
+            <input type="text" id="fname" name="fname" value="John" required readonly> <br>
+
+            <label for="lname"> Last Name:</label><br>
+            <input type="text" id="lname" name="lname" value="Doe" required disabled> <br>
+
+            <label for="email">Email: </label><br>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required> <br>
+
+            <label for="password">Password: </label> <br>
+            <input type="password" id="password" name="password" required> <br>
+
+            <input type="file" id="color" name="color" required> <br>
+
+        </form>
+    </div>
+
+    <br><br>
+
+    <div>
+        <p>Choose your favorite programing lang</p>
+        <form>
+            <input type="radio" id="JS" name="fav_lang">
+            <label for="JS"> JS </label> <br>
+
+            <input type="radio" id="Python" name="fav_lang">
+            <label for="Python"> Python </label> <br>
+
+            <input type="radio" id="Golang" name="fav_lang">
+            <label for="Golang"> Golang </label> <br>
+        </form>
+    </div>
+ <br> <br>
+    <div>
+        <p>Select the social media account that you use</p>
+        <form action="/valdidatedate.js" target="_blank" method="post" autocomplete="on">
+            <input type="checkbox" id="fb" name="fb" value="Facebook">
+            <label for="fb"> I have Facebook Account </label> <br>
+
+            <input type="checkbox" id="twiter" name="twiter" value="Twiter">
+            <label for="twiter"> I have Twiter Account </label> <br>
+
+            <input type="checkbox" id="linkedin" name="linkedin" value="Linkedin">
+            <label for="linkedin"> I have Linkedin Account </label> <br>
+        </form>
+    </div>
+<br> <br>
+    <div>
+        <form>
+            <label for="cars"> Choose your car</label> <br>
+            <select name="cars" id="cars" size="3" multiple>
+                <option value="nissan">Nissan</option>
+                <option value="audi">Audi</option>
+                <option value="bmw">BMW</option>
+                <option value="mercedes" selected>Mercedes</option>
+            </select>
+   
+            <br><br>
+            <!-- <textarea name="message" id="message" cols="30" rows="10">
+                Write your message
+            </textarea> -->
+
+            <input list="browsers">
+            <datalist id="browsers">
+                <option value="ME"></option>
+                <option value="Safari"></option>
+                <option value="Chrome"></option>
+                <option value="Firefox"></option>
+            </datalist>
+        </form>
+    </div>
+
+
+
+</body>
+</html>
+
