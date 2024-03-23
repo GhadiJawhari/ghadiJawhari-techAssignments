@@ -1,66 +1,59 @@
-const Admin = require("../models/adminSchema");
+const User = require("../models/userSchema");
 const Product = require("../models/productSchema");
+const Cart = require("../models/cartSchema");
 
-exports.addNewProduct = async(req,res) =>{
-    try{
-        const admin = await Admin.findById(req.body["userName"]);
-        if (!admin) {
-            return res.status(403).json({ message: "Forbidden: You are not authorized to add products" });
+/*exports.addProducttoCart = async (req, res) => {
+    try {
+        const cart = await Cart.findOne({ user: req.body.user });
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
         }
-    
-    const product = await Product.findById(req.params[ "productID"]);
-    if (!product) {
-        return res.status(401).json({ message: "product is already added" });
-    }
-     
-     const newProduct = await User.create({
-        productName: req.body["productName"],
-        productPrice: req.body[" productPrice"],
-        quantityInStock: req.body["quantityInStock"],
-        description: req.body["description"],
-        category: req.body["category"],
-        
-    });
 
-    return res.status(201).json({ data: newProduct, message: "product added successfully" });
+        const productIndex = cart.products.findIndex(item => item.product.equals(req.params.productID));
+        if (productIndex !== -1) {
+            return res.status(400).json({ message: "Product is already in the cart" });
+        }
+        cart.products.push({ product: req.params.productID, quantity: 1 });
+        await cart.save();
 
-    }catch(err){
-        console.log(err);
-        return res.status(500).json({ message: err.message });
+        return res.status(200).json({ message: "Product added to cart successfully" });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
-exports.removeProduct = async(req,res)=>{
-    try{ 
-        const admin = await Admin.findById(req.body["userName"]);
-        if (!admin) {
-            return res.status(403).json({ message: "Forbidden: You are not authorized to add products" });
-        }
+
+exports.deleteProductFromCart = async (req, res) => {
+    try {
         
-        const productToRemove = await User.findById(req.params["productID"]);
-    if (!productToRemove) {
-        return res.status(404).json({ message: "product is not being found" });
-    }
-   
-    await product.deleteOne();
-    return res.status(200).jason({message:"product deeted successfully"});
+        const cart = await Cart.findOne({ user: req.body.user });
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
+        }
+        const productIndex = cart.products.findIndex(item => item.product.equals(req.params.productID));
+        if (productIndex === -1) {
+            return res.status(404).json({ message: "Product not found in the cart" });
+        }
+        cart.products.splice(productIndex, 1);
+        await cart.save();
 
-    }catch(err){
-        console.error(err);
-        return res.status(500).json({ message: err.message });
+        return res.status(200).json({ message: "Product removed from cart successfully" });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
-
-};
+};*/
 
 exports.getProductDetails = async (req, res) => {
     try {
-        const { productId } = req.params;
-        const product = await Product.findById(req.params["productID"]);
+        
+        const product = await Product.findById(req.params["productId"]);
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
         }
         return res.status(200).json({ data: product, message: "Product details retrieved successfully" });
     } catch (err) {
-        console.error(err);
+        console.log(err);
         return res.status(500).json({ message: err.message });
     }
 };

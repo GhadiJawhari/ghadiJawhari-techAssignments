@@ -2,63 +2,69 @@ const User = require("../models/usernSchema");
 const Product = require("../models/productSchema");
 const Cart = require("../models/cartSchema");
 
-exports.addToCart = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const { productId, quantity } = req.body;
+exports.addItemToCart = async (req, res) => {
+    const { userId, productId } = req.body;
+    const quantity = Number.parseInt(req.body.quantity);
 
-        if (!req.user) {
+    try {
+        const user = await User.findById(req.params["userID"]);
+
+        if (!user) {
             return res.status(401).json({ success: false, message: 'Unauthorized: User not logged in' });
         }
+        let cart = await Cart.findOne({ userId });
 
-      
-        if (req.user.id !== userId) {
-            return res.status(403).json({ success: false, message: 'Forbidden: User is not authorized to access this cart' });
+        const productDetails = await Product.findById(productId);
+
+        if (!productDetails) {
+            return res.status(404).json({ type: "Invalid", message: "Product not found" });
         }
 
-        let cart = await Cart.findOne({ user: userId });
-
-      
         if (!cart) {
-            cart = new Cart({ user: userId, products: [] });
+            cart = new Cart({
+                userId,
+                items: [],
+                subTotal: 0
+            });
         }
+        const indexFound = cart.items.findIndex(item => item.productId === productId);
 
-      
-        const existingProductIndex = cart.products.findIndex(item => item.product.toString() === productId);
-
-        if (existingProductIndex !== -1) {
-            cart.products[existingProductIndex].quantity += quantity;
+        if (quantity === 0 && indexFound !== -1) {
+            cart.items.splice(indexFound, 1);
+        } else if (indexFound !== -1) {
+            cart.items[indexFound].quantity += quantity;
+            cart.items[indexFound].total = cart.items[indexFound].quantity * productDetails.price;
+        } else if (quantity > 0) {
+            cart.items.push({
+                productId,
+                quantity,
+                price: productDetails.price,
+                total: productDetails.price * quantity
+            });
         } else {
-           
-            cart.products.push({ product: productId, quantity });
+            return res.status(400).json({ Message: "Invalid request" });
         }
+        cart.subTotal = cart.items.reduce((acc, item) => acc + item.total, 0);
 
-        cart.totalAmount = cart.products.reduce((total, item) => total + (item.quantity * item.product.price), 0);
+        const updatedCart = await cart.save();
 
-        await cart.save();
-
-        res.status(200).json({ success: true, message: 'Product added to cart successfully', cart });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        res.status(200).json({  message: "Process Successful", data: updatedCart });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({  message: "Internal server error" });
     }
 };
 
+
 exports.getCart = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const user = await User.findById(req.params["userID"]);
 
-        if (!req.user) {
+        if (!user) {
             return res.status(401).json({ success: false, message: 'Unauthorized: User not logged in' });
         }
-
-    t
-        if (req.user.id !== userId) {
-            return res.status(403).json({ success: false, message: 'Forbidden: User is not authorized to access this cart' });
-        }
-
        
-        const cart = await Cart.findOne({ user: userId }).populate('products.product', 'name price');
+        const cart = await Cart.findOne({ user:req.body.user }).populate('products.product', 'name price');
 
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });
@@ -66,41 +72,42 @@ exports.getCart = async (req, res) => {
 
         res.status(200).json({ success: true, cart });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
 
-exports.removeFromCart = async (req, res) => {
-    try {
-        const { userId, productId } = req.params;
+const Cart = require('../models/cart');
 
-        if (!req.user) {
+exports.deleteItemFromCart = async (req, res) => {
+    const { userId, productId } = req.params;
+
+    try {
+        const user = await User.findById(req.params["userID"]);
+
+        if (!user) {
             return res.status(401).json({ success: false, message: 'Unauthorized: User not logged in' });
         }
-
-        if (req.user.id !== userId) {
-            return res.status(403).json({ success: false, message: 'Forbidden: User is not authorized to access this cart' });
-        }
-
-        
-        let cart = await Cart.findOne({ user: userId });
+        let cart = await Cart.findOne({ userId });
 
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Cart not found' });
         }
 
-       
-        cart.products = cart.products.filter(item => item.product.toString() !== productId);
+        const indexToDelete = cart.products.findIndex(item => item.product.toString() === productId);
 
-        cart.totalAmount = cart.products.reduce((total, item) => total + (item.quantity * item.product.price), 0);
-
-       
+        if (indexToDelete === -1) {
+            return res.status(404).json({ success: false, message: 'Item not found in cart' });
+        }
+        cart.products.splice(indexToDelete, 1);
+        cart.totalAmount = calculateTotalAmount(cart.products);
         await cart.save();
-
-        res.status(200).json({ success: true, message: 'Product removed from cart successfully', cart });
+        return res.status(200).json({ success: true, message: 'Item deleted from cart', cart });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        console.log(error);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
+function calculateTotalAmount(products) {
+    return products.reduce((total, item) => total + item.product.price * item.quantity, 0);
+}

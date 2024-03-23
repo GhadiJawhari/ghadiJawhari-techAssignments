@@ -1,25 +1,21 @@
 const User = require("../models/userSchema");
 const validator = require("validator");
 
-exports.deleteUser = async(req,res)=>{
-    try{ 
-        const userTryingToDelete = await User.findById(req.body["userName"]);
-    if (!userTryingToDelete) {
-        return res.status(404).json({ message: "user trying to delete user is not found" });
-    }
-    if (userTryingToDelete._id.toString()!== User.user.toString()){
-        return res.status(400).json({message:"a user can not delete another users account "});
-    }
-    await user.deleteOne();
-    return res.status(200).jason({message:"account deeted successfully"});
+exports.deleteUser = async (req, res) => {
+    try {
+        const userTryingToDelete = await User.findOne({ userName: req.body.userName });
 
-    }catch(err){
+        if (!userTryingToDelete) {
+            return res.status(404).json({ message: "User trying to delete user is not found" });
+        }
+        await userTryingToDelete.deleteOne();
+
+        return res.status(200).json({ message: "Account deleted successfully" });
+    } catch (err) {
         console.error(err);
-        res.status(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message });
     }
-
 };
-
 
 exports.signUp = async(req,res)=>{
     try{if(!validator.isEmail(req.body["email"])){
@@ -28,8 +24,7 @@ exports.signUp = async(req,res)=>{
     if (!validator.isMobilePhone(req.body["phoneNumber"], "ar-LB", { strictMode: false })) {
         return res.status(400).json({ message: "Invalid phone number" });
     }
-    const checkUserExistence = await User.findOne({$or:[{email:req.body["email"]},{username:req.body["userName"]}],
-});
+    const checkUserExistence = await User.findOne({$or:[{email:req.body["email"]},{username:req.body["userName"]}],});
 if(checkUserExistence){
     return res.status(409).json({message:"user already exists"});
 }
@@ -38,7 +33,7 @@ if(req.body["password"]!==req.body["passwordConfirm"]){
     return res.status(400).json({messag:"Please enter matching password and password confirm"
 });
 }
-const newUser =await User.creat({
+const newUser =await User.create({
     firstName: req.body["firstName"],
     lastName: req.body["lastName"],
     userName: req.body["userName"],
@@ -47,10 +42,9 @@ const newUser =await User.creat({
     gender: req.body["gender"],
     shippingAddress: req.body["shippingAddress"],
     billingAddress: req.body["billingAddress"],
-    accountStatus: req.body["accountStatus"],
     password:req.body["password"],
     passwordConfirm:req.body["passwordConfirm"],
-    passwordChangedAt:date.now(),
+    passwordChangedAt:new Date(),
 });
 return res.status(201).json({message:"Signup Successfully"});
 

@@ -20,9 +20,16 @@ const productSchema = new Schema({
         min: 0,
         max: 1000,
     },
+    quantity:{
+        type:Number,
+        required: true,
+        min: 0,
+        max: 100,
+
+    },
     description: {
         type: String,
-        required: [true, "Description for product is required"],
+       
         minlength: 20,
         maxlength: 500,
     },

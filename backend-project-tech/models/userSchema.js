@@ -79,7 +79,7 @@ const userSchema = new Schema({
     accountStatus: {
         type: String,
         enum: ["active", "inactive", "suspended"], // Allowed values for account status
-        required: [true, "Account status is required"],
+        
     },
     
 },

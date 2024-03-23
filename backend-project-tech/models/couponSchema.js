@@ -12,9 +12,10 @@ const couponSchema = new Schema({
         required: true,
         min: 0
     },
-    active: {
+    status: {
         type: Boolean,
-        default: true
+        required: true,
+        enum:["active", "not_active"]
     },
     expiresAt: {
         type: Date,

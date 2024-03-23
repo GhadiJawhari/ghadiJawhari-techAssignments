@@ -38,6 +38,23 @@ const adminSchema = new Schema({
         maxlength: 20,
         lowercase: true,
     },
+    password:{
+        type: String,
+        required:[true,"password is required"],
+        trim:true,
+        minLength:8,
+        trim: true,
+
+    },
+    passwordConfirm:{
+       
+            type: String,
+            trim:true,
+            minLength:8,
+            trim: true,
+
+    },
+    passwordChangedAt: Date,
     gender: {
         type: String,
         required: [true, "Gender is required"],
@@ -47,4 +64,19 @@ const adminSchema = new Schema({
 
 },
 {timestamps:true});
+adminSchema.pre("save", async function(next){//next is a special middleware
+    try{
+        if (!this.isModified("password")){
+            return next();
+        }
+        this.password = await bcrypt.hash(this.password,12);
+        this .passwordChangedAt=undefined;
+
+    }catch(err){
+        console.log(err);
+    }
+});
+adminSchema.methods.checkPassword = async function(candidatePassword,userPassword){
+    return await bcrypt.compare(candidatePassword,userPassword);
+};
 module.exports = mongoose.model('Admin',adminSchema);

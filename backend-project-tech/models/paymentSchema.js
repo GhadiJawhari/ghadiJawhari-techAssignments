@@ -9,7 +9,7 @@ const paymentSchema = new Schema({
     ref: 'User',
     required: true
   },
-  // Reference to the Product schema
+  //
   order: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Order',
@@ -25,12 +25,8 @@ const paymentSchema = new Schema({
     enum: ['Pending', 'Completed', 'Failed'],
     default: 'Pending'
   },
-  // Additional information
-  transactionId: {
-    type: String
-  },
+  
 }, { timestamps: true }); 
 
-// Create Payment model
 module.exports = mongoose.model('Payment', paymentSchema);
 
