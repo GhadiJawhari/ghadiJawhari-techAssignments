@@ -19,6 +19,10 @@ const cartSchema = new Schema({
             min: 1
         }
     }],
+    totalPrice: {
+      type:Schema.Types.decimal18,
+      default:0.00,
+      },
     totalAmount: {
         type: Number,
         required: true,
@@ -26,11 +30,13 @@ const cartSchema = new Schema({
     },
 },
 
+
+
 { timestamps: true });
 
 module.exports = mongoose.model('Cart', cartSchema);
 
-
+/*
 
 let ItemSchema = new Schema(
   {
@@ -57,3 +63,4 @@ let ItemSchema = new Schema(
   }
 );
 module.exports = mongoose.model("item", ItemSchema);
+*/

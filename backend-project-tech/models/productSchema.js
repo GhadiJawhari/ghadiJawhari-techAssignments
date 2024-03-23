@@ -6,15 +6,15 @@ const productSchema = new Schema({
         maxlength: 60,
         required: [true, "Product name is required"],
         trim: true,
+        unique:true,
     },
     productPrice: {
-        type: Number,
+        type: Schema.types.Decimal128,
         required: [true, "Product price is required"],
-        min: 0,
-        max: 10000,
+       defauly:0.00,
 
     },
-    quantityInStock: {
+    productQuantity: {
         type: Number,
         required: [true, "Quantity in stock is required"],
         min: 0,
@@ -29,19 +29,23 @@ const productSchema = new Schema({
     },
     description: {
         type: String,
-       
         minlength: 20,
         maxlength: 500,
+        unique: true,
     },
     category: {
         type: String,
         required: [true, "Category is required"],
         enum: ["Lipstick", "Foundation", "Eyeshadow", "Blush", "Mascara", "Other"],
     },
+    createdby:{
+        type: Schema.Types.ObjectId,
+        ref: "User",
+   
+    },
     imageURL: {
         type: String,
-        //required: [true, "Image URL is required"],
-        trim: true,
+        default:"",    
     },
    
     

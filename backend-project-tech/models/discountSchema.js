@@ -9,7 +9,7 @@ const discountSchema = new Schema({
     },
     percentage: {
         type: Number,
-        required: true,
+        
         min: 0,
         max: 100
     },

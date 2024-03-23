@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
+const {promisify} = require("util");
+const signToken =(id)=>{
+    return jwt.sign({id},process.env.JWT_SECRET,{
+    expiresIn: process.env.JWT_EXPIRES_IN, 
+    });
+};
 const userSchema = new Schema({
     firstName: {
         type: String,
@@ -51,6 +57,7 @@ const userSchema = new Schema({
     passwordConfirm:{
        
             type: String,
+            required:[true,"please confirm password"],
             trim:true,
             minLength:8,
             trim: true,
@@ -58,6 +65,19 @@ const userSchema = new Schema({
     },
     passwordChangedAt: Date,
     
+    role:{
+        type: String,
+        default:"user",
+        enum: ["user", "admin"], // Allowed values for account status
+        required:true,
+    },
+    orders:[
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Order"
+        },
+    ],
+
     gender: {
         type: String,
         required: [true, "Gender is required"],
@@ -100,6 +120,15 @@ userSchema.pre("save", async function(next){//next is a special middleware
 });
 userSchema.methods.checkPassword = async function(candidatePassword,userPassword){
     return await bcrypt.compare(candidatePassword,userPassword);
+};
+userSchema.methods.passwordChangedAfterTokenIssued =  function(JWTtimestamp){
+    if(this.passwordChangedAt){
+        const paswordChangeTime = parseInt(this.passwordChangedAt.getTime()/1000,10
+        );
+        return passwoChangeTime > JWTtimestamp;
+
+    }
+    return false;
 };
 module.exports = mongoose.model("User", userSchema);
 

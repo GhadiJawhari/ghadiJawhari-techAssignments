@@ -1,69 +1,89 @@
-const User = require("../models/userSchema");
 const Product = require("../models/productSchema");
-const Cart = require("../models/cartSchema");
+const User = require("../models/userSchema");
 
-/*exports.addProducttoCart = async (req, res) => {
-    try {
-        const cart = await Cart.findOne({ user: req.body.user });
-        if (!cart) {
-            return res.status(404).json({ message: "Cart not found" });
+const checkAdmin =async (req) =>{
+    try{
+        const user = await User.findByOne({_id:req.user._id});
+        if (!user|| user.role!=="admin"){
+            return false;
+        }
+        else {
+            return true;
         }
 
-        const productIndex = cart.products.findIndex(item => item.product.equals(req.params.productID));
-        if (productIndex !== -1) {
-            return res.status(400).json({ message: "Product is already in the cart" });
-        }
-        cart.products.push({ product: req.params.productID, quantity: 1 });
-        await cart.save();
-
-        return res.status(200).json({ message: "Product added to cart successfully" });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Internal Server Error" });
-    }
-};
-
-exports.deleteProductFromCart = async (req, res) => {
-    try {
-        
-        const cart = await Cart.findOne({ user: req.body.user });
-        if (!cart) {
-            return res.status(404).json({ message: "Cart not found" });
-        }
-        const productIndex = cart.products.findIndex(item => item.product.equals(req.params.productID));
-        if (productIndex === -1) {
-            return res.status(404).json({ message: "Product not found in the cart" });
-        }
-        cart.products.splice(productIndex, 1);
-        await cart.save();
-
-        return res.status(200).json({ message: "Product removed from cart successfully" });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Internal Server Error" });
-    }
-};*/
-
-exports.getProductDetails = async (req, res) => {
-    try {
-        
-        const product = await Product.findById(req.params["productId"]);
-        if (!product) {
-            return res.status(404).json({ message: "Product not found" });
-        }
-        return res.status(200).json({ data: product, message: "Product details retrieved successfully" });
-    } catch (err) {
+    }catch(err){
         console.log(err);
-        return res.status(500).json({ message: err.message });
-    }
+    
+}
 };
 
-/*exports.listProducts = async (req, res) => {
+exports.CreateProduct = async (req, res) =>{
+    try{
+        const user =await checkAdmin(req);
+        if(user==false){
+            return res.status(404).json({message:"A PRODUCT CAN BE ADDED ONLY BY THE ADMIN "});
+        }
+        const newProduct = await Product.create({
+            productName: req.body.productName,
+            productPrice: req.body.productPrice,
+            quantityInStock: req.body.quantityInStock,
+            description: req.body.description,
+            category: req.body.category,
+            createdby: req.user._id,
+        });
+        return res.status(201).json({message:"PRODUCT ADDED SUCCESSFULLY",
+    product:newProduct,});
+
+    }catch(err){
+        console.log(err);
+        return res.status(500).json(err);
+    }
+};
+exports.updateProduct = async(req,res)=>{
+    try{
+    const user = await checkAdmin(req);
+    if(user!=true){
+        return res.status(404).json({message:"A PRODUCT CAN BE UPDATED ONLY BY THE ADMIN "});
+    }
+    const product = await Product.findById(req.params.productID,req.body,{new:true});
+    if(!product){
+        return res.status(404).json({message:"PRODUCT NOT FOUND"});
+    }
+    return res.status(200).json({message:"product updated successfully"});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json(err);
+    }
+
+};
+exports.deleteProduct = async (req, res) => {
     try {
-        const products = await Product.find({});
-        return res.status(200).json({ data: products, message: "All products retrieved successfully" });
+        const user = await checkAdmin(req);
+        if (user !== true) {
+            return res.status(404).json({ message: "A PRODUCT CAN BE DELETED ONLY BY THE ADMIN" });
+        }
+
+        const product = await Product.findByIdAndDelete(req.params.productID);
+        if (!product) {
+            return res.status(404).json({ message: "PRODUCT NOT FOUND" });
+        }
+
+        return res.status(200).json({ message: "Product deleted successfully" });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
     }
-};*/
+};
+exports .getAllProducts = async(req,res) => {
+    try {
+        const products = await Product.find();
+        if(products.length <= 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        return res.status(200).json({ message: "products" });
+        
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+    }
+};
