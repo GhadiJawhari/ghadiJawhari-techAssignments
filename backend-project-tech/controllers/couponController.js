@@ -8,7 +8,6 @@ exports.createCoupon = async (req, res) => {
         if (!isAdmin) {
             return res.status(401).json({ message: "Unauthorized: Only admins can create coupons" });
         }
-
         const newCoupon = await Coupon.create({
             code: req.body.code,
             status: req.body.status,
@@ -39,10 +38,7 @@ exports.updateCoupon = async (req, res) => {
        
         coupon.status = req.body.status;
         coupon.expiresAt = req.body.expiresAt;
-
-      
         const updatedCoupon = await coupon.save();
-
         return res.status(200).json({ coupon: updatedCoupon });
     } catch (err) {
         console.error(err);
